@@ -1,0 +1,15 @@
+{
+    "name": "ubuntu-texlive-ja",
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "dockerComposeFile": "docker-compose.yml",
+    "extensions": [
+        "formulahendry.terminal",
+        "james-yu.latex-workshop"
+    ],
+    "service": "ubuntu-texlive-ja",
+    "workspaceFolder": "/workdir",
+    "shutdownAction": "stopCompose",
+    "postCreateCommand": "/bin/bash ./.devcontainer/post-install.sh"
+}

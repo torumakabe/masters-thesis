@@ -1,0 +1,30 @@
+\documentclass[12pt,a4paper]{article}
+\begin{document}
+\begin{center}
+Research on the application of declarative configuration management in distributed computing infrastructure
+\end{center}
+\begin{flushright}
+1930014~~Toru Makabe
+\end{flushright}
+　With the spread of distributed computing such as cloud computing, resources like servers, network devices, and storage that make up the infrastructure is increasing and diversifying. Furthermore, its operation is becoming more dependent on engineers with expertise. Therefore, declarative configuration management that sets and maintains the infrastructure as desired, without having to be aware of the state of resources and without instructing procedures one by one, is attracting attention.
+
+Declarative configuration management is not a new concept. There were previous researches based on constraint logic programming. However, there are many discussions such as inconsistency with the managed resource's autonomy, the amount and time of calculation to determine the configuration, the time required for resource operation, the risk of operating resources in operation, and the difficulty of learning constraint logic programming was there.
+
+On the other hand, Kubernetes, an open source platform software, solved the significant problems of declarative configuration management pointed out in previous researches by accepting trade-offs such as allowing eventual consistency. On the other hand, some accidents in the dissemination and negative effects on safety and resilience are suspected.
+
+Regarding the resiliency of applications running on Kubernetes, there is a study focusing on containers' recovery time. However, the structure that supports it has not been pursued. This research contributes to future research and practices of declarative configuration management by showing issues and prospects through its structural analysis of Kubernetes.
+
+Kubernetes integrates configuration management and recovery functions. The recovery function is the main element that supports safety. Therefore, it is expected that the characteristics and insights regarding configuration management will be obtained through the safety analysis. In this research, STPA (System-Theoretic Accident Model and Processes) was selected as the method, and the structure and safety were analyzed. Since Kubernetes is composed of various components, STPA, which focuses on the components' interaction, is suitable for the analysis.
+
+This research first created a control structure diagram (control structure) to analyze the whole and subsystems' structure according to the STPA procedure and investigated unsafe control actions. Next, obtained the hazard scenario that is the cause. Besides, classified Kubernetes failure cases based on the obtained hazard scenarios and evaluated their validity.
+
+The analysis's deliverables will help Kubernetes users understand its control structure and hazard scenarios and contribute to risk assessment, problem handling, and chaos engineering. Besides, the discussions derived from the analysis are valuable not only for Kubernetes but also for research and practice in applying and utilizing declarative configuration management. Among them, there are two notable points.
+
+The first is the need to verify the validity of the input contents when creating or changing resources. In the classification of hazard scenarios and failure cases, the number of accidents caused by lack of validation was remarkable. For example, an application submitted without limiting the amount of resources or setting priorities competes with other applications and system components that share resources, leading to hazards. Kubernetes accepts eventual consistency, so there are the negative impacts of optional validation on declarations' input.
+
+The second notable discussion is reconfiguration tolerance of application. In declarative configuration management, the configuration management function takes the initiative to reconfigure resources to maintain the desired state. There is an idea of "Design for Failure" in which an application is designed to assume that a failure will occur, but in declarative configuration management, a reconfiguration event should also be considered. In other words, a design "Design for Chaos" that can withstand chaos caused by failures and reconfiguration is required. One of the implementation examples is request retry. In this research, we verified that the presence or absence of it affects reconfiguration tolerance of application.
+
+Ensuring reconfiguration tolerance cannot be resolved if the examination is closed to the infrastructure's scope. For example, not only implementing a retry function in an application but also testing it is an issue. Reconfiguration tolerance is not enough to test when creating or modifying an application. Chaos testing should be performed continuously in consideration of changes in the resource configuration.
+
+In the future, the target of declarative configuration management will be expanded to resources such as network and storage that currently have problems in applying declarative configuration management. Efforts have already begun at cloud service providers. However, there are restrictions such as setting immutable attributes due to the dependency between resources and the magnitude of the impact when changing. Solving this restriction is a future work.
+\end{document}

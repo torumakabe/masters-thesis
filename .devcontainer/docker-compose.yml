@@ -1,0 +1,11 @@
+version: "3"
+services:
+  ubuntu-texlive-ja:
+    image: ghcr.io/torumakabe/masters-thesis/ubuntu-texlive-ja:0.0.2
+    #build: .
+    command: sleep infinity
+    volumes:
+      - ../:/workdir
+      - ./.latexmkrc:/root/.latexmkrc
+    environment:
+      SHELL: "/bin/bash"
